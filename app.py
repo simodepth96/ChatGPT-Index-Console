@@ -35,8 +35,11 @@ api_key = st.sidebar.text_input(
 st.title("🔍 OpenAI URL Inspection Tool")
 st.markdown("""
 This app is a rough attempt to create URL inspection tool for OpenAI.
+
 It checks whether a page URL is cached in OpenAI's index or requires grounding to synthesize an AI answer. 
+
 The app relies on a fixed IP user location set in the UK (London) as it was found providing more granular and precise output.
+
 More details – [OpenAI Web Search Documentation](https://platform.openai.com/docs/guides/tools-web-search#live-internet-access)
 """)
 st.markdown("---")
