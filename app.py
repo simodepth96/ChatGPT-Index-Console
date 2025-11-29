@@ -118,7 +118,7 @@ if st.button("Run Check", type="primary", disabled=not api_key or not url):
                 # Interpret results
                 st.subheader("Interpretation:")
                 
-                if output_text.startswith("Yes—I can access it") or output_text.startswith("I can access the page"):
+                if output_text.startswith("Yes—I can") or output_text.startswith("I can access the page"):
                     st.success("""
                     ✅ **ChatGPT-User was not prevented by JavaScript blockers and surfaced a cached raw HTML to synthesize a likely answer in the live chat.**
                     
@@ -141,7 +141,6 @@ if st.button("Run Check", type="primary", disabled=not api_key or not url):
 with st.expander("ℹ️ How to use this tool"):
     st.markdown("""
     1. **Enter your OpenAI API Key** in the sidebar (required)
-       - Or set it as an environment variable: `OPENAI_API_KEY`
     2. **Paste the URL** you want to test in the input field
     3. **Select the check type:**
        - **Check if cached**: Tests if the URL is in OpenAI's cache (external_web_access: False)
@@ -154,4 +153,5 @@ with st.expander("ℹ️ How to use this tool"):
 
 # Footer
 st.markdown("---")
-st.caption("OpenAI URL Inspection Tool | For SEO and content optimization research")
+st.caption("Delivered by Simone De Palma for [SEODepths](https://seodepths.com)")
+
