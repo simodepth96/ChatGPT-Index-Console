@@ -87,7 +87,15 @@ if st.button("Run Check", type="primary", disabled=not api_key or not url):
                 
                 status_box.update(label="Making API request...", state="running")
                 
-                # Make API call
+                # Make API call (user_location is defined but not used in the API call)
+                # This matches the working Colab script pattern
+                user_location = {
+                    "type": "approximate",
+                    "country": "GB",
+                    "city": "London",
+                    "region": "London",
+                }
+                
                 response = openai_client.responses.create(
                     model="gpt-5",
                     tools=[{
@@ -95,8 +103,7 @@ if st.button("Run Check", type="primary", disabled=not api_key or not url):
                         "external_web_access": external_web_access
                     }],
                     tool_choice="auto",
-                    input=f"Read this page {url} and make a summary, on if you can access it.",
-                    user_location=user_location
+                    input=f"Read this page {url} and make a summary, on if you can access it."
                 )
                 
                 status_box.update(label="Complete", state="complete")
