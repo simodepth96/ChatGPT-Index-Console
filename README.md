@@ -72,15 +72,38 @@ When location is *not* specified:
   
 This hints that ChatGPT-User may synthesize answers even without accessing the target page, by leveraging neighbouring documents or topic clusters.
 
+### **Testing a JavaScript-Free Page Without IP Location**
+
+When a page is *free from JavaScript dependency* and location is *not specified*:
+
+<img width="1392" height="394" alt="image" src="https://github.com/user-attachments/assets/8a853372-f75c-4e26-8dd8-464ed457b8e6" />
+
+* ChatGPT-User can access the page in the cached OpenAI's index
+* The answer returned is structured but may not appear as concise.
+
+### **Testing a JavaScript-Free Page With Declared IP Location**
+
+When a page is *free from JavaScript dependency* and location is *specified*:
+
+<img width="1357" height="482" alt="image" src="https://github.com/user-attachments/assets/694cb208-9eb2-4da1-ac24-32c8e1e25ab4" />
+
+* ChatGPT-User can access the page in the cached OpenAI's index
+* The answer returned is structured and may appear a bit more concise.
+
 ---
 
 ## 💭 Interpretation & Open Questions
 
-The behaviour raises several interesting hypotheses:
+The tests suggest that OpenAI likely keeps a cached index of webpages.
 
-* Does OpenAI maintain a large cached HTML index behind the scenes?
-* When a page is missing, does ChatGPT interpolate content from nearest-neighbour documents?
-* Are TF-IDF, BM25, or embedding-based retrieval used to synthesize fallback answers?
+When a page isn’t available or relies on JavaScript, ChatGPT may fill in answers using related pages from the cache.
+
+TL;DR - ChatGPT can often give structured answers without directly accessing the page, relying on cached content and related topics.
+
+However, this behaviour raises a few interesting questions:
+
+* How does ChatGPT pick the “closest match” when a page is missing?
+* Does user location affect which cached content is used?
 * Does user IP influence grounding behaviour or cached index selection?
 
 ---
