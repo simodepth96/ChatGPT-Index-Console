@@ -42,44 +42,34 @@ OpenAI’s documentation hints at an internal cached index used to speed up or s
 
 ## 🔍 Observations From Tests
 
-### ### 1. **CSR Rendering Issues**
-
-The `destination.html` file is used as a test page.
+An example of a page significantly reliant on JavaScript to build the rendering path was used.
 Its navigation and `<head>` content depend on CSR JavaScript, which **OpenAI’s crawlers cannot execute**.
 
-IMAGE
-
-When testing with `"external_web_access": false`, outputs are shallow and incomplete — confirming that:
-
-IMAGE
-
-> OpenAI’s cached index does not execute JavaScript and cannot render CSR-dependent content.
+<img width="1310" height="598" alt="image" src="https://github.com/user-attachments/assets/e4b6c829-3dc0-4253-83d9-e295f5449204" />
 
 ---
 
-### 2. **Testing With Forced IP Location (London, UK)**
+### **Testing With Declared IP Location (London, UK)**
 
-The app supports passing an approximate user location.
 With IP location set manually:
 
-* Outputs tend to be less prone to hallucinations
+<img width="1311" height="546" alt="image" src="https://github.com/user-attachments/assets/32238497-1337-415b-bb59-337651fa8e45" />
+
+* ChatGPT-User fails executing JavaScript blockers
+* The output is concise, probably less prone to hallucinations
 
 ---
 
-### 3. **Testing Without IP Location**
+### **Testing Without IP Location**
 
 When location is *not* specified:
 
+<img width="1400" height="490" alt="image" src="https://github.com/user-attachments/assets/a7a6387a-3457-4f82-b7a6-290ca0967396" />
+
+* ChatGPT-User can't overcome the JavaScript blockers
 * The output becomes more verbose and more exposed to hallucinations.
-* ChatGPT-User may reference related domains (e.g., *lopesan.com*)
-IMAGE
-
-* This suggests fallback behaviour based on:
-
-  * **Broader cached index context**
-  * **Semantic similarity retrieval**
-  * Possibly **TF-IDF-like ranking** or embedding-based semantic recall
-
+* ChatGPT-User may reference related domains (e.g., *lopesan.com*) from a broad cached index. It would be interesting to learn how the model identifies the closest match within the index (e.g; TF-IDF?).
+  
 This hints that ChatGPT-User may synthesize answers even without accessing the target page, by leveraging neighbouring documents or topic clusters.
 
 ---
