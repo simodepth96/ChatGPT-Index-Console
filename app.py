@@ -103,8 +103,9 @@ if st.button("Check OpenAI Index", type="primary", disabled=not api_key or not u
                     ChatGPT is familiar with your page and there may be little to no optimisation efforts for you take on.
                     """)
                 elif (output_text.startswith("I can't access") or 
-                      output_text.startswith("I couldn’t access") or
-                      ",but only " in output_text):
+                      output_text.startswith("I couldn’t") or
+                      output_text.startswith("I tried to open") or
+                      ",but " in output_text):
                     st.warning("""
                     ⚠️ **ChatGPT-User may have been prevented by JavaScript blockers (CSR geo-location pop-ups e.g;) or the page simply couldn't be found in OpenAI's cached index.**
                     
