@@ -14,6 +14,8 @@ This tool explores whether a URL is included in OpenAI’s cached index and does
 
 ## Using the App
 
+<img width="1842" height="758" alt="image" src="https://github.com/user-attachments/assets/0cc574e6-7e09-49e6-959a-ad8ff5da46ca" />
+
 The [Streamlit app](https://openai-index-console.streamlit.app/) allows you to:
 
 * Provide a URL
