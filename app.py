@@ -1,6 +1,6 @@
 import os
 import streamlit as st
-# Try to import openai - use the same pattern as the working example
+
 try:
     import openai
     from openai import OpenAI
@@ -17,6 +17,7 @@ except ImportError as e:
     ```
     """)
     st.stop()
+    
 # Page configuration
 st.set_page_config(
     page_title="OpenAI URL Inspection Tool",
@@ -56,13 +57,13 @@ if st.button("Check OpenAI Index", type="primary", disabled=not api_key or not u
     else:
         try:
             with st.status("Checking URL...", expanded=True) as status_box:
-                # Initialize OpenAI client (using the same pattern as working example)
+                # Initialize OpenAI client 
                 openai_client = openai.Client(api_key=api_key)
                 
-                # Check cached content only (external_web_access: False)
+                # Check cached pages (external_web_access: False)
                 external_web_access = False
                 
-                # User location (fixed to London, UK)
+                # User location based on OpenAI's documentation (London, UK)
                 user_location = {
                     "type": "approximate",
                     "country": "GB",
@@ -115,12 +116,11 @@ if st.button("Check OpenAI Index", type="primary", disabled=not api_key or not u
 with st.expander("ℹ️ How to use this tool"):
     st.markdown("""
     1. **Enter your OpenAI API Key** in the sidebar (required)
-       - Or set it as an environment variable: `OPENAI_API_KEY`
     2. **Paste the URL** you want to test in the input field
     3. **Click "Check OpenAI Index"** to test if the URL is cached in OpenAI's index
-    4. Review the results and interpretation
+    4. Review the results
     
-    **Note:** This tool checks cached content only and uses a fixed UK (London) location for more consistent results.
+    **Note:** This tool checks cached pages only and uses a fixed IP location for more consistent results - this is based on personal recent tests.
     """)
 # Footer
 st.markdown("---")
