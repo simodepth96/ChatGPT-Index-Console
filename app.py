@@ -20,7 +20,6 @@ except ImportError as e:
 # Page configuration
 st.set_page_config(
     page_title="OpenAI URL Inspection Tool",
-    page_icon="🔍",
     layout="wide"
 )
 # Sidebar for API key
@@ -32,7 +31,7 @@ api_key = st.sidebar.text_input(
     value=os.environ.get("OPENAI_API_KEY", "")
 )
 # Main content
-st.title("🤖 OpenAI URL Inspection Tool")
+st.title("OpenAI URL Inspection Tool")
 st.markdown("""
 This app is an early attempt to create a **URL inspection tool** for OpenAI’s ChatGPT. It checks whether a page is cached in OpenAI’s index or requires grounding to synthesize an answer.
 
@@ -49,7 +48,7 @@ url = st.text_input(
 )
 
 # Run button
-if st.button("Run Check", type="primary", disabled=not api_key or not url):
+if st.button("Check OpenAI Index", type="primary", disabled=not api_key or not url):
     if not api_key:
         st.error("⚠️ Please enter your OpenAI API key in the sidebar")
     elif not url:
@@ -118,7 +117,7 @@ with st.expander("ℹ️ How to use this tool"):
     1. **Enter your OpenAI API Key** in the sidebar (required)
        - Or set it as an environment variable: `OPENAI_API_KEY`
     2. **Paste the URL** you want to test in the input field
-    3. **Click "Run Check"** to test if the URL is cached in OpenAI's index
+    3. **Click "Check OpenAI Index"** to test if the URL is cached in OpenAI's index
     4. Review the results and interpretation
     
     **Note:** This tool checks cached content only and uses a fixed UK (London) location for more consistent results.
