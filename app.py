@@ -1,19 +1,51 @@
 import streamlit as st
+import sys
+import subprocess
+
+# Show diagnostic information
+st.sidebar.header("🔍 Diagnostics")
+st.sidebar.write("**Python Version:**", sys.version)
+st.sidebar.write("**Python Path:**", sys.executable)
+
+# Show installed packages
+try:
+    result = subprocess.run([sys.executable, "-m", "pip", "list"], 
+                          capture_output=True, text=True, timeout=10)
+    st.sidebar.text_area("Installed Packages", result.stdout, height=200)
+except Exception as e:
+    st.sidebar.error(f"Could not list packages: {e}")
 
 # Try to import OpenAI with error handling
 try:
     from openai import OpenAI
+    st.sidebar.success("✅ OpenAI imported successfully!")
 except ImportError as e:
     st.error(f"""
     ❌ Failed to import OpenAI module.
     
     Error: {str(e)}
     
-    Please ensure:
-    1. requirements.txt contains: openai>=1.54.4
-    2. Python version is set to 3.11
-    3. App has been rebooted after configuration changes
+    **Check the diagnostics in the sidebar to see if openai is installed.**
+    
+    If openai is NOT in the package list, your requirements.txt is not being read.
     """)
+    
+    # Try to install it on the fly (won't persist, but helps diagnose)
+    if st.button("🔧 Try Installing OpenAI Now"):
+        with st.spinner("Installing openai..."):
+            try:
+                result = subprocess.run(
+                    [sys.executable, "-m", "pip", "install", "openai==1.54.4"],
+                    capture_output=True, text=True, timeout=60
+                )
+                st.code(result.stdout)
+                if result.returncode == 0:
+                    st.success("Installation completed! Refresh the page.")
+                else:
+                    st.error(result.stderr)
+            except Exception as install_error:
+                st.error(f"Installation failed: {install_error}")
+    
     st.stop()
 
 # Page configuration
