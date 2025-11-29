@@ -32,15 +32,13 @@ api_key = st.sidebar.text_input(
     value=os.environ.get("OPENAI_API_KEY", "")
 )
 # Main content
-st.title("🔍 OpenAI URL Inspection Tool")
+st.title("🤖 OpenAI URL Inspection Tool")
 st.markdown("""
-This app is a rough attempt to create URL inspection tool for OpenAI.
+This app is an early attempt to create a **URL inspection tool** for OpenAI’s ChatGPT. It checks whether a page is cached in OpenAI’s index or requires grounding to synthesize an answer.
 
-It checks whether a page URL is cached in OpenAI's index or requires grounding to synthesize an AI answer. 
+The app uses a **UK (London) user location**, which I found to reduce hallucinations in the output and better suit my use cases.
 
-The app relies on a fixed IP user location set in the UK (London) as it was found providing more granular and precise output.
-
-More details – [OpenAI Web Search Documentation](https://platform.openai.com/docs/guides/tools-web-search#live-internet-access)
+**More details** – [OpenAI Web Search Documentation](https://platform.openai.com/docs/guides/tools-web-search#live-internet-access)
 """)
 st.markdown("---")
 # URL input
