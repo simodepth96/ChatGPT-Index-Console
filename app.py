@@ -81,7 +81,7 @@ if st.button("Check OpenAI Index", type="primary", disabled=not api_key or not u
                         "external_web_access": external_web_access
                     }],
                     tool_choice="auto",
-                    input=f"Read this page {url} and make a summary, on if you can access it."
+                    input=f"Can you access this page {url}? If you can, make a summary"
                 )
                 
                 status_box.update(label="Complete", state="complete")
@@ -96,7 +96,7 @@ if st.button("Check OpenAI Index", type="primary", disabled=not api_key or not u
                 # Interpret results
                 st.subheader("Interpretation:")
                 
-                if output_text.startswith("Yes—I can ") or output_text.startswith("I can access the page"):
+                if output_text.startswith("Yes—I can ") or output_text.startswith("I can access "):
                     st.success("""
                     ✅ **ChatGPT-User was not prevented by JavaScript blockers and surfaced a cached raw HTML to synthesize a likely answer in the live chat.**
                     
