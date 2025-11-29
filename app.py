@@ -118,7 +118,7 @@ if st.button("Run Check", type="primary", disabled=not api_key or not url):
                 # Interpret results
                 st.subheader("Interpretation:")
                 
-                if output_text.startswith("Yes—I can access it") or output_text.startswith("I can access the page"):
+                if output_text.startswith("Yes—I can ") or output_text.startswith("I can access the page"):
                     st.success("""
                     ✅ **ChatGPT-User was not prevented by JavaScript blockers and surfaced a cached raw HTML to synthesize a likely answer in the live chat.**
                     
@@ -130,8 +130,6 @@ if st.button("Run Check", type="primary", disabled=not api_key or not url):
                     
                     Consider reviewing blocking CSR JavaScript and increase mentions and citations via targeted Digital PR efforts.
                     """)
-                else:
-                    st.info("The response doesn't match expected patterns. Please review the raw output above.")
                     
         except Exception as e:
             st.error(f"❌ An error occurred: {str(e)}")
