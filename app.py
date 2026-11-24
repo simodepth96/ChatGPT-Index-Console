@@ -75,7 +75,7 @@ if st.button("Check OpenAI Index", type="primary", disabled=not api_key or not u
                 
                 # Make API call
                 response = openai_client.responses.create(
-                    model="gpt-5",
+                    model="gpt-6-luna",
                     tools=[{
                         "type": "web_search",
                         "external_web_access": external_web_access
